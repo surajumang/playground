@@ -1,0 +1,147 @@
+
+Given two strings s and t, determine if they are isomorphic.
+Two strings s and t are isomorphic if the characters in s can be replaced to get t.
+All occurrences of a character must be replaced with another character while preserving the order of characters.
+No two characters may map to the same character, but a character may map to itself.
+
+Example 1:
+
+Input: s = "egg", t = "add" Output: true
+
+
+
+Example 2:
+
+Input: s = "foo", t = "bar"Output: false
+
+"for" "baz"
+
+"eeqs" "aafa"
+
+e->a
+f->q
+
+Time -> O(len(S))
+Space -> O(1)
+
+===========
+# len(s) == len(t)
+# compute frequence of char in s and match it with frequency in c
+# Check existing mapping ()
+
+
+public boolean isIsomorphic(String s, String t) {
+    if(s == null && t == null) return true;
+
+    if(s == null || t == null) return false;
+
+
+
+    if(s.length() != t.length()) {
+        return false;
+    }
+
+    Map<Character, Character> map = new HashMap<>();
+
+    char[] sArray = s.toCharArray(); // ['e', 'g', 'g']
+    char[] tArray = t.toCharArray(); // ['a', 'd', 'd']
+
+    for(int i=0; i< sArray.length; i++) {
+        if(map.containsKey( sArray.charAt(i) ) {
+            //check mapping can be reused
+            char mapped = map.get(sArray[i]);
+            if(mapped != tArray[i]) {
+                return false;
+            }
+        }else {
+            //insert new mapping
+            map.put(sArray[i], tArray[i]);
+        }
+
+        // e -> a
+        // g -> d
+    }
+    return true;
+}
+
+Question 2.
+
+Given a 2D array, print it in spiral form starting from the element at 0,0.
+
+
+Input : {
+{1,    2,   3,   4},
+{5,    6,   7,   8},
+{9,   10,  11,  12},
+{13,  14,  15,  16 }}
+
+{(0,0), (0,1), (0,2), (0,3)}
+{(1,0), (1,1), (1,2), (1,3)}
+{(2,0), (2,1), (2,2), (2,3)}
+{(3,0), (3,1), (3,2), (3,3)}
+
+Output : 1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
+
+======
+row, col,
+direction
+start, end
+Four set of markers to guide the row and column traversals.
+
+// N*M (start, end)
+
+// f()
+(i,j) --> (k,n)
+
+Araay[i] [j...n]
+
+Array[i+1,k] [n]
+
+Array[k][n-1...j]
+
+Array[k-1 ..i+1 ][j]
+
+===
+
+
+
+public static void spiralOrder(int[][] array) {
+
+    if(array == null) {
+        return;
+    }
+
+    helper(array, 0, 0, array.length, array[0].length);
+
+}
+
+private static helper(int [][] array, int i, int j, int k, int n){
+
+    if(i > k || j > n) {
+        return;
+    }
+
+    for( int tempJ=j; tempJ <= n; tempJ++ ) {
+        System.out.print(array[i][tempJ + " ");
+    }
+
+    for(int tempI=i+1; tempI <= k; tempI++) {
+        System.out.print(array[tempI][n] + " ");
+    }
+
+    for(int tempN=n-1; tempN => j; tempN--) {
+        System.out.println(array[k][tempN]);
+    }
+
+    for(int tempK=k-1; tempK >= i+1; tempK--) {
+        System.out.println(array[tempK][j]);
+    }
+
+    helper(array, i+1, j+1, k-1, n-1);
+}
+
+
+
+
+
+
